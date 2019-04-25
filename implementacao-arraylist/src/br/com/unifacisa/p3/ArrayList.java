@@ -1,10 +1,8 @@
-package br.com.unifacisa.p3.arraylistGenerics;
-
-import java.util.Arrays;
+package br.com.unifacisa.p3;
 
 /**
  * Implementação da classe ArrayList
- * @author Pedro
+ * @author Pedro Henrique Melo Maracaja Silva
  * @param <T>
  */
 public class ArrayList<T> {
@@ -147,16 +145,21 @@ public class ArrayList<T> {
 	}
 
 	/**
-	 * toString em formato de textos;
+	 * Obter o Array em formato de textos;
 	 */
 	@Override
 	public String toString() {
-		@SuppressWarnings("unchecked")
-		T[] aux = (T[]) new Object[tamanho];
+		StringBuilder arrayTxt = new StringBuilder();
+		arrayTxt.append("[");
 		for (int i = 0; i < tamanho; i++) {
-			aux[i] = array[i];
+			if ( i ==  0) {
+				arrayTxt.append(array[i]);
+			} else {
+				arrayTxt.append(", " + array[i]);
+			}
 		}
-		return Arrays.toString(aux);
+		arrayTxt.append("]");
+		return arrayTxt.toString();
 	}
 	
 	/**

@@ -1,4 +1,4 @@
-package br.com.unifacisa.p3.arraylistGenerics.test;
+package br.com.unifacisa.p3.test;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -12,7 +12,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import br.com.unifacisa.p3.arraylistGenerics.ArrayList;
+import br.com.unifacisa.p3.ArrayList;
 
 class ArrayListTest {
 
@@ -370,6 +370,96 @@ class ArrayListTest {
 			lista.add("Test " + i);
 		}
 		assertTrue(lista.toString().equals("[Test 0, Test 1, Test 2, Test 3, Test 4, Test 5, Test 6, Test 7, Test 8, Test 9]"));
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Test
+	void testSemTipo() {
+		@SuppressWarnings("rawtypes")
+		ArrayList lista = new ArrayList();
+		lista.add("Test 1");
+		lista.add(1);
+		
+		assertEquals(2, lista.size());
+		
+		lista.add(1.5);
+		
+		assertEquals(1.5, lista.get(2));
+		
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Test
+	void testContainsDifTipo() {
+		@SuppressWarnings("rawtypes")
+		ArrayList lista = new ArrayList();
+		
+		lista.add("Test 1");
+		lista.add(1);
+		assertEquals(1, lista.get(1));
+		
+		lista.add(1.5);
+		
+		assertTrue(lista.contains(1.5));
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Test
+	void testAddPorIndexDifTipo() {
+		@SuppressWarnings("rawtypes")
+		ArrayList lista = new ArrayList();
+		
+		lista.add("Test 1");
+		lista.add(1);
+		assertEquals(1, lista.get(1));
+		
+		lista.add(1.5);
+		
+		lista.set(1, 2);
+		
+		assertEquals(2, lista.get(1));
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Test
+	void testRemoveObjDifTipo() {
+		@SuppressWarnings("rawtypes")
+		ArrayList lista = new ArrayList();
+		
+		lista.add("Test 1");
+		lista.add(1);
+		assertEquals(1, lista.get(1));
+		
+		lista.add(1.5);
+		
+		lista.remover("Test 1");
+		
+		assertEquals(2, lista.size());
+		
+		assertEquals(1, lista.get(0));
+	}
+	
+	@Test
+	void testObterValorIndexNegativo() {
+		ArrayList<String> lista = new ArrayList<String>();
+		for (int i = 0; i < 10; i++) {
+			lista.add("Test" + i);
+		}
+		
+		assertThrows(ArrayIndexOutOfBoundsException.class , () -> {
+			lista.get(-1);
+		});
+	}
+	
+	@Test
+	void testObterValorPorIndex() {
+		ArrayList<String> lista = new ArrayList<String>();
+		for (int i = 0; i < 10; i++) {
+			lista.add("Test " + i);
+		}
+		
+		assertTrue("Test 1".equals(lista.get(1)));
 	}
 	
 }
